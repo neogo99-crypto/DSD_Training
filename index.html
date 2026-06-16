@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSD Training - File Directory</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between font-sans">
 
+    <header class="bg-blue-600 text-white shadow-md py-6">
+        <div class="max-w-4xl mx-auto px-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold tracking-wide">DSD Training Directory</h1>
+                <p id="subfolder-title" class="text-blue-100 text-sm mt-1">กำลังโหลดข้อมูล...</p>
+            </div>
+            <div class="text-3xl opacity-80">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl w-full mx-auto px-4 py-8 flex-grow">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            
+            <div id="loading" class="flex flex-col items-center justify-center py-12">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+                <p class="text-gray-500">กำลังดึงข้อมูลจาก Repository...</p>
+            </div>
+
+            <div id="error-message" class="hidden bg-red-50 border-l-4 border-red-500 p-4 rounded mb-6">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-triangle-exclamation text-red-500 mr-3 text-lg"></i>
+                    <p id="error-text" class="text-red-700 font-medium"></p>
+                </div>
+            </div>
+
+            <div id="file-list-container" class="hidden">
+                <div class="flex justify-between items-center border-b border-gray-200 pb-3 mb-4">
+                    <span class="text-sm font-semibold text-gray-500 uppercase tracking-wider">ชื่อไฟล์</span>
+                    <span id="file-count" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">0 ไฟล์</span>
+                </div>
+                <ul id="file-list" class="divide-y divide-gray-100">
+                    </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 text-sm border-t border-gray-700">
+        <p>&copy; 2026 DSD Training Portal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 1. ตั้งค่าข้อมูลพื้นฐานของ GitHub Repository ของคุณ
+        const GITHUB_USER = "neogo99-crypto";
+        const GITHUB_REPO = "DSD_Training";
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            // 2. ดึงค่าพารามิเตอร์ ?sub= จาก URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const subFolder = urlParams.get('sub');
+
+            const subfolderTitle = document.getElementById('subfolder-title');
+            const loadingDiv = document.getElementById('loading');
+            const errorDiv = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            const fileListContainer = document.getElementById('file-list-container');
+            const fileList = document.getElementById('file-list');
+            const fileCountBadge = document.getElementById('file-count');
+
+            // ตรวจสอบว่ามีการส่งพารามิเตอร์มาหรือไม่
+            if (!subFolder) {
+                showError("กรุณาระบุพารามิเตอร์ใน URL เช่น ?sub=TechElec เพื่อดูรายชื่อไฟล์");
+                return;
+            }
+
+            // แสดงชื่อโฟลเดอร์ปัจจุบันบน Header
+            subfolderTitle.textContent = `โฟลเดอร์: ${subFolder}`;
+
+            // 3. เรียก GitHub API เพื่อขอรายชื่อไฟล์ในโฟลเดอร์นั้น
+            const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${subFolder}`;
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            throw new Error(`ไม่พบโฟลเดอร์ "${subFolder}" ใน Repository หรือโฟลเดอร์นี้อาจจะว่างเปล่า`);
+                        }
+                        throw new Error("ไม่สามารถเชื่อมต่อกับ GitHub API ได้");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // กรองเอาเฉพาะที่เป็น "ไฟล์" (ไม่เอาโฟลเดอร์ย่อยข้างในซ้ำ และข้ามไฟล์ระบบอย่าง .DS_Store)
+                    const files = data.filter(item => item.type === 'file' && item.name !== '.DS_Store');
+
+                    if (files.length === 0) {
+                        showError(`ไม่พบไฟล์ภายในโฟลเดอร์ "${subFolder}"`);
+                        return;
+                    }
+
+                    // อัปเดตจำนวนไฟล์
+                    fileCountBadge.textContent = `${files.length} ไฟล์`;
+
+                    // 4. วนลูปสร้าง Hyperlink สำหรับดาวน์โหลดหรือเปิดอ่านไฟล์
+                    files.forEach(file => {
+                        // ใช้ path ตรงไปที่ github.io ของโฟลเดอร์ย่อยนั้นๆ
+                        const fileUrl = `https://${GITHUB_USER}.github.io/${GITHUB_REPO}/${subFolder}/${file.name}`;
+                        
+                        const li = document.createElement('li');
+                        li.className = "py-3.5 px-2 hover:bg-gray-50 flex items-center justify-between transition duration-150 ease-in-out group";
+
+                        // เลือก Icon ตามประเภทไฟล์เบื้องต้น
+                        let iconClass = "fa-regular fa-file-lines text-gray-400";
+                        if (file.name.endsWith('.pdf')) iconClass = "fa-regular fa-file-pdf text-red-500";
+                        else if (file.name.endsWith('.html') || file.name.endsWith('.htm')) iconClass = "fa-regular fa-file-code text-blue-500";
+                        else if (file.name.endsWith('.jpg') || file.name.endsWith('.png') || file.name.endsWith('.webp')) iconClass = "fa-regular fa-file-image text-green-500";
+
+                        li.innerHTML = `
+                            <div class="flex items-center space-x-3 overflow-hidden mr-4">
+                                <i class="${iconClass} text-lg flex-shrink-0"></i>
+                                <a href="${fileUrl}" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-blue-600 font-medium truncate group-hover:underline">
+                                    ${file.name}
+                                </a>
+                            </div>
+                            <a href="${fileUrl}" target="_blank" rel="noopener noreferrer" class="flex items-center text-xs text-gray-400 hover:text-blue-600 space-x-1 flex-shrink-0 bg-gray-100 group-hover:bg-blue-50 px-2.5 py-1 rounded transition">
+                                <span>เปิดไฟล์</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        `;
+                        fileList.appendChild(li);
+                    });
+
+                    // ซ่อน Loading และแสดงรายการไฟล์
+                    loadingDiv.classList.add('hidden');
+                    fileListContainer.classList.remove('hidden');
+                })
+                .catch(error => {
+                    showError(error.message);
+                });
+
+            // ฟังก์ชันสำหรับแสดงข้อผิดพลาด
+            function showError(message) {
+                loadingDiv.classList.add('hidden');
+                fileListContainer.classList.add('hidden');
+                errorText.textContent = message;
+                errorDiv.classList.remove('hidden');
+                subfolderTitle.textContent = "เกิดข้อผิดพลาด";
+            }
+        });
+    </script>
+</body>
+</html>
