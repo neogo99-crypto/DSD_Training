@@ -1,0 +1,174 @@
+{
+  "type": "bubble",
+  "size": "giga",
+  "header": {
+    "type": "box",
+    "layout": "vertical",
+    "height": "220px",
+    "paddingAll": "0px",
+    "contents": [
+      {
+        "type": "image",
+        "url": "https://kjl.co.th/wp-content/uploads/2025/02/Wiring-Diagram.jpg",
+        "size": "full",
+        "aspectMode": "cover",
+        "position": "absolute"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "position": "absolute",
+        "width": "100%",
+        "height": "100%",
+        "background": {
+          "type": "linearGradient",
+          "angle": "0deg",
+          "startColor": "#F0F9FFCC",
+          "endColor": "#F0F9FF33"
+        },
+        "contents": []
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "position": "absolute",
+        "width": "100%",
+        "height": "100%",
+        "justifyContent": "flex-end",
+        "paddingAll": "20px",
+        "contents": [
+          {
+            "type": "text",
+            "text": "🛠️ AUTOMOTIVE TRAINING",
+            "color": "#0369A1",
+            "weight": "bold",
+            "size": "sm",
+            "margin": "none"
+          },
+          {
+            "type": "text",
+            "text": "เทคนิคการซ่อมระบบไฟฟ้า\nในรถยนต์",
+            "weight": "bold",
+            "size": "xxl",
+            "color": "#0F172A",
+            "wrap": true,
+            "margin": "xs"
+          }
+        ]
+      }
+    ]
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "backgroundColor": "#F8FAFC",
+    "spacing": "xl",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "vertical",
+        "backgroundColor": "#F0FDF4",
+        "cornerRadius": "16px",
+        "paddingAll": "16px",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "md",
+            "contents": [
+              {
+                "type": "icon",
+                "url": "https://cdn-icons-png.flaticon.com/512/747/747310.png",
+                "size": "sm"
+              },
+              {
+                "type": "text",
+                "text": "14, 21, 28 มิถุนายน และ 5 กรกฎาคม 2569",
+                "size": "md",
+                "color": "#166534",
+                "weight": "bold",
+                "wrap": true
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "md",
+            "margin": "md",
+            "contents": [
+              {
+                "type": "icon",
+                "url": "https://cdn-icons-png.flaticon.com/512/2088/2088617.png",
+                "size": "sm"
+              },
+              {
+                "type": "text",
+                "text": "เวลา 08.30 - 17.00 น.",
+                "size": "md",
+                "color": "#374151"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "📂 รายละเอียดเอกสารการเรียน",
+            "weight": "bold",
+            "size": "md",
+            "color": "#0EA5E9"
+          },
+          {
+            "type": "text",
+            "text": "เอกสารประกอบการเรียนจากอาจารย์ที่มีหลายไฟล์ ผมได้จัดรวมกลุ่มและทำเป็นเว็บไซต์ไว้ให้แล้ว เพื่อความสะดวกในการเปิดอ่านและดาวน์โหลดครับ",
+            "size": "md",
+            "color": "#475569",
+            "wrap": true,
+            "margin": "md",
+            "lineSpacing": "4px"
+          },
+          {
+            "type": "text",
+            "text": "สามารถกดปุ่มเปิดเว็บไซต์ด้านล่างนี้ได้เลยครับ",
+            "size": "md",
+            "color": "#64748B",
+            "style": "italic",
+            "margin": "md"
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "backgroundColor": "#F8FAFC",
+    "paddingAll": "20px",
+    "paddingTop": "0px",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "vertical",
+        "cornerRadius": "xl",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "🌐 เข้าสู่คลังเอกสารการเรียน",
+              "uri": "https://neogo99-crypto.github.io/DSD_Training/?sub=TechElec"
+            },
+            "style": "primary",
+            "color": "#0EA5E9",
+            "height": "md"
+          }
+        ]
+      }
+    ]
+  }
+}
