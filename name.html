@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE Flex Message Generator</title>
+<style>
+body{font-family:Arial,sans-serif;background:#eef5ff;margin:0;padding:20px} .container{max-width:1200px;margin:auto;background:white;padding:20px;border-radius:12px;box-shadow:0 0 12px rgba(0,0,0,.1)} h1{color:#1565c0} .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px} input,textarea,button{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;box-sizing:border-box} textarea{height:350px;font-family:monospace} button{background:#1976d2;color:white;border:none;cursor:pointer;margin-top:8px} button:hover{background:#0d47a1} .full{grid-column:1/-1} .info{margin-top:10px;padding:10px;background:#f4f9ff;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>LINE Flex Message Generator</h1>
+<div class="grid">
+<div><label>CSV URL</label><input id="csvUrl" value="https://neogo99-crypto.github.io/DSD_Training/data.txt"></div>
+<div><label>ชื่อหลักสูตร</label><input id="course"></div>
+<div><label>วันที่อบรม</label><input id="date"></div>
+<div><label>เวลา</label><input id="time"></div>
+<div class="full"><label>สถานที่อบรม</label><input id="location"></div>
+</div>
+<button onclick="generateFlex()">Generate Flex JSON</button>
+<div class="info" id="summary"></div>
+<textarea id="output"></textarea>
+<button onclick="copyJSON()">Copy JSON</button>
+</div>
+<script>
+async function fetchCSV(url){const res=await fetch(url);const txt=await res.text();return txt.trim().split(/\r?\n/).map(x=>x.split(','));}
+function checkbox(v){return v.trim()==='1'?'☑':'☒';}
+function rowBox(no,thai,eng,status,bg){return {type:'box',layout:'horizontal',backgroundColor:bg,paddingAll:'6px',contents:[{type:'text',text:String(no),flex:1,size:'sm',weight:'bold'},{type:'box',layout:'vertical',flex:5,contents:[{type:'text',text:thai,size:'sm',weight:'bold',wrap:true},{type:'text',text:eng,size:'xs',color:'#666666',wrap:true}]},{type:'text',text:checkbox(status),flex:1,size:'lg',align:'center'}]};}
+function makeBubble(chunk,page,total,meta,start){const body=[];chunk.forEach((r,i)=>{body.push(rowBox(start+i,r[0],r[1],r[2],i%2===0?'#F5FAFF':'#E8F4FF'));});body.push({type:'separator'});body.push({type:'text',text:`Page ${page}/${total}`,size:'xs',align:'center',margin:'md'});
+return {type:'bubble',size:'giga',header:{type:'box',layout:'vertical',backgroundColor:'#1976D2',contents:[{type:'text',text:'🎓 '+meta.course,color:'#FFFFFF',weight:'bold',wrap:true},{type:'text',text:'📅 '+meta.date,color:'#FFFFFF',size:'xs'},{type:'text',text:'⏰ '+meta.time,color:'#FFFFFF',size:'xs'},{type:'text',text:'📍 '+meta.location,color:'#FFFFFF',size:'xs',wrap:true}]},body:{type:'box',layout:'vertical',contents:body}};}
+async function generateFlex(){try{const rows=await fetchCSV(document.getElementById('csvUrl').value);let data=rows;if(rows.length && (rows[0][0].toLowerCase().includes('thai')||isNaN(parseInt(rows[0][2])))) data=rows.slice(1);
+const meta={course:document.getElementById('course').value,date:document.getElementById('date').value,time:document.getElementById('time').value,location:document.getElementById('location').value};const chunks=[];for(let i=0;i<data.length;i+=5){chunks.push(data.slice(i,i+5));}const contents=[];chunks.forEach((c,idx)=>contents.push(makeBubble(c,idx+1,chunks.length,meta,idx*5+1)));const flex={type:'carousel',contents:contents};document.getElementById('output').value=JSON.stringify(flex,null,2);document.getElementById('summary').innerHTML=`จำนวนผู้เข้าอบรม: ${data.length} คน | จำนวน Bubble: ${chunks.length}`;}catch(e){alert('Error: '+e.message);}}
+function copyJSON(){const t=document.getElementById('output');t.select();document.execCommand('copy');alert('Copied');}
+</script>
+</body>
+</html>
