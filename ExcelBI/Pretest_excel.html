@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เฉลยและคำอธิบายแบบทดสอบ MS Excel Advance & Power BI (40 ข้อ)</title>
+    <style>
+        @page {
+            size: 210mm 297mm;
+            margin: 0;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #0f172a;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            background-color: #f1f5f9;
+        }
+        
+        /* Modern Tech Palette */
+        :root {
+            --primary: #0f172a;
+            --primary-accent: #0284c7;
+            --cyber-teal: #06b6d4;
+            --cyber-glow: #38bdf8;
+            --bg-card: #ffffff;
+            --bg-alt: #f8fafc;
+            --border-color: #cbd5e1;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --success-bg: #f0fdf4;
+            --success-text: #15803d;
+            --success-border: #bbf7d0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        .header-block {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 65%, #0284c7 100%);
+            color: #ffffff;
+            padding: 32px 28px;
+            border-radius: 12px;
+            border-left: 8px solid var(--cyber-teal);
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-block::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.18);
+            color: var(--cyber-glow);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 9pt;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+
+        .header-block h1 {
+            margin: 0 0 10px 0;
+            font-size: 22pt;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        .header-block p {
+            margin: 0;
+            font-size: 11pt;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .summary-box {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 10pt;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 28px;
+        }
+
+        .summary-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 12pt;
+            color: var(--primary-accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 14pt;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 6px solid var(--cyber-teal);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header .tag {
+            font-size: 9pt;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 400;
+        }
+
+        /* Q&A Cards */
+        .qa-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px 18px;
+            background-color: var(--bg-card);
+            margin-bottom: 14px;
+            border-left: 4px solid var(--primary-accent);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .qa-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .qa-question {
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.45;
+        }
+
+        .qa-num {
+            font-weight: 800;
+            color: var(--primary-accent);
+            white-space: nowrap;
+        }
+
+        .qa-answer {
+            font-size: 10.5pt;
+            color: var(--success-text);
+            font-weight: 700;
+            background-color: var(--success-bg);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+            border: 1px solid var(--success-border);
+        }
+
+        .qa-explain {
+            font-size: 9.5pt;
+            color: #475569;
+            line-height: 1.55;
+            background-color: var(--bg-alt);
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .qa-explain strong {
+            color: var(--primary);
+        }
+
+        /* Code/Function styling */
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: #e2e8f0;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+
+        /* Responsive Layout */
+        @media screen and (max-width: 640px) {
+            .container {
+                padding: 0 10px;
+                margin: 12px auto;
+            }
+            .header-block {
+                padding: 20px 16px;
+            }
+            .header-block h1 {
+                font-size: 16pt;
+            }
+            .section-header {
+                font-size: 11pt;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .qa-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header Block -->
+    <div class="header-block">
+        <span class="badge">EXPERT SOLUTION & DETAILED GUIDE</span>
+        <h1>เฉลยและคำอธิบายแบบทดสอบ MS Excel Advance & Power BI</h1>
+        <p>คู่มือเฉลยคำตอบพร้อมอธิบายหลักการทำงานอย่างละเอียด ครอบคลุมทั้ง 40 ข้อ (Excel 20 ข้อ + Power BI 20 ข้อ)</p>
+    </div>
+
+    <!-- Overview Box -->
+    <div class="summary-box">
+        <h3>📌 ภาพรวมแบบทดสอบ (Assessment Overview)</h3>
+        <p style="margin: 0; line-height: 1.6;">
+            เอกสารชุดนี้รวบรวมเฉลยอย่างเป็นทางการและคำอธิบายเชิงลึกระดับมืออาชีพ เหมาะสำหรับใช้ทบทวนความรู้ ประกอบด้วย 
+            <strong>ส่วนที่ 1: MS Excel Advance (20 ข้อ)</strong> ที่มุ่งเน้นการใช้อ้างอิงเซลล์ ฟังก์ชันเงื่อนไข การจัดการข้อมูล และ Power Pivot / DAX เบื้องต้น 
+            รวมถึง <strong>ส่วนที่ 2: Power BI (20 ข้อ)</strong> ที่ครอบคลุม Data Cleansing, Data Modeling, DAX, Visualizations และการตั้งค่า Dashboard
+        </p>
+    </div>
+
+    <!-- SECTION 1: MS EXCEL ADVANCE -->
+    <div class="section-header">
+        <span>ส่วนที่ 1: เฉลยแบบทดสอบ MS Excel Advance (ข้อ 1 - 20)</span>
+        <span class="tag">Excel Advanced Core Knowledge</span>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 1:</span> ถ้าต้องการดูผลสรุปเบื้องต้น เช่น ผลรวม ค่ามากสุด ค่าน้อยสุดและค่าเฉลี่ย โดยไม่ต้องการพิมพ์สูตร ต้องทำอย่างไร</div>
+        <div class="qa-answer">✓ คำตอบ: ดูผลสรุปได้ที่ Status bar</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> เมื่อคลุมดำเลือกช่วงข้อมูล แถบสถานะด้านล่างสุดของโปรแกรม Excel (Status bar) จะคำนวณและแสดงผลรวม (Sum), ค่าเฉลี่ย (Average), และจำนวนนับ (Count) ให้ทันทีโดยไม่ต้องเขียนสูตร และสามารถคลิกขวาเพื่อเลือกเปิด/ปิดการแสดงค่า Min/Max เพิ่มเติมได้</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 2:</span> AutoFill หรือการเติมข้อมูลอัตโนมัติ ทำได้โดย</div>
+        <div class="qa-answer">✓ คำตอบ: คลิกที่มุมขวาของเซลล์ ให้เมาส์เป็นรูปบวก +</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> การใช้ Fill Handle ทำได้โดยการเลื่อนเมาส์ไปที่มุมล่างขวาของเซลล์ที่เลือก จนเครื่องหมายเมาส์เปลี่ยนเป็นสัญลักษณ์บวกสีดำทึบ (+) จากนั้นคลิกค้างแล้วลากเพื่อคัดลอกสูตรหรือเติมข้อมูลตามอนุกรม</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 3:</span> การทำซ้ำคำสั่งล่าสุด ใช้คีย์ลัดโดย</div>
+        <div class="qa-answer">✓ คำตอบ: F4</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> ปุ่มคีย์ลัด <code>F4</code> ทำหน้าที่สั่งให้ Excel ทำซ้ำคำสั่งล่าสุดที่เพิ่งกระทำไป (เช่น การระบายสีเซลล์ การแทรกแถว) และหากใช้งานขณะกำลังพิมพ์สูตร ปุ่ม F4 จะทำหน้าที่สลับรูปแบบการล็อกเซลล์ ($)</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 4:</span> การอ้างอิงเซลล์ B$4 หมายถึง</div>
+        <div class="qa-answer">✓ คำตอบ: ไม่ล็อกคอลัมภ์ B ล็อกแถว 4</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> เครื่องหมาย <code>$</code> ถูกวางไว้หน้าเลข 4 จึงหมายถึงการล็อกแถวที่ 4 ไว้ไม่ให้เปลี่ยนตำแหน่งเวลาคัดลอกสูตรลงล่าง แต่คอลัมน์ B ไม่มีเครื่องหมาย $ จึงเปลี่ยนได้ตามแนวนอน (Mixed Reference)</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 5:</span> การอ้างอิงเซลล์ $B$4 หมายถึง</div>
+        <div class="qa-answer">✓ คำตอบ: ล็อกคอลัมภ์ B ล็อกแถว 4</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> มีเครื่องหมาย <code>$</code> อยู่ทั้งหน้าคอลัมน์ B และหน้าแถว 4 เป็นการตรึงตำแหน่งแบบสมบูรณ์ (Absolute Reference) ไม่ว่าจะคัดลอกสูตรไปตำแหน่งใด สูตรจะชี้ไปที่เซลล์ B4 เสมอ</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 6:</span> การอ้างอิงเซลล์ $B4 หมายถึง</div>
+        <div class="qa-answer">✓ คำตอบ: ล็อกคอลัมภ์ B ไม่ล็อกแถว 4</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> เครื่องหมาย <code>$</code> อยู่หน้าคอลัมน์ B ทำให้คอลัมน์ถูกล็อกตรึงไว้ แต่แถว 4 ไม่มี $ กำกับ ทำให้แถวเปลี่ยนไปตามแนวดิ่งเมื่อคัดลอกสูตรลงล่าง</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 7:</span> ฟังก์ชัน COUNTA(E4:E9) ใช้สำหรับ</div>
+        <div class="qa-answer">✓ คำตอบ: นับช่องที่มี "ข้อมูลทุกประเภท"</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> <code>COUNTA</code> (Count All) ทำหน้านี้นับจำนวนเซลล์ที่มีข้อมูลทุกชนิดที่ไม่ใช่เซลล์ว่าง ทั้งตัวเลข ตัวอักษร สัญลักษณ์ หรือ Error ต่างจาก <code>COUNT</code> ที่นับเฉพาะตัวเลขเท่านั้น</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 8:</span> ฟังก์ชัน =LARGE(J4:J9, 2) ใช้สำหรับ</div>
+        <div class="qa-answer">✓ คำตอบ: หาค่าที่สูงที่สุดอันดับ 2</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> ฟังก์ชัน <code>LARGE(array, k)</code> ใช้สำหรับค้นหาค่าตัวเลขที่มีค่ามากเป็นอันดับที่ k ในชุดข้อมูล (ในที่นี้กำหนด k = 2 จึงได้ค่าที่มากที่สุดเป็นอันดับ 2)</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 9:</span> ฟังก์ชัน =ROUND(K4,2) ใช้สำหรับ</div>
+        <div class="qa-answer">✓ คำตอบ: ปัดให้เหลือทศนิยม 2 ตำแหน่ง</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> <code>ROUND(number, num_digits)</code> ปัดเศษทศนิยมตามหลักคณิตศาสตร์ โดยกำหนด <code>num_digits = 2</code> เพื่อให้ผลลัพธ์เหลือทศนิยม 2 ตำแหน่ง</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 10:</span> ฟังก์ชัน =INT(3450.99) ใช้สำหรับ</div>
+        <div class="qa-answer">✓ คำตอบ: ทำให้เลขเป็นจำนวนเต็ม</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> ฟังก์ชัน <code>INT</code> จะปัดเศษทศนิยมทิ้งทั้งหมด และตัดลงให้เหลือเฉพาะจำนวนเต็มที่มีค่าน้อยกว่าหรือเท่าเดิม (ในข้อนี้จะได้ผลลัพธ์เป็น 3450)</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 11:</span> บริษัทต้องการตัดเกรดผลงานพนักงานเป็น A, B, C เพื่อใช้พิจารณาโบนัสปลายปี ควรใช้ฟังก์ชันใด เหมาะสมที่สุด</div>
+        <div class="qa-answer">✓ คำตอบ: IFS</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> ฟังก์ชัน <code>IFS</code> ออกแบบมาเพื่อทดสอบหลายเงื่อนไขต่อเนื่องกัน เหมาะสำหรับการตัดเกรดโดยไม่ต้องใช้สูตร IF ซ้อนกันหลายชั้นเหมือนใน Excel เวอร์ชั่นเก่า</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 12:</span> พนักงานจะได้โบนัสก็ต่อเมื่อ "ยอดรวม Q1 ผ่านเกณฑ์ (150,000)" และ "ห้ามมียอดขายตกต่ำกว่า 50,000 บาทแต่ละเดือน" ควรใช้ฟังก์ชันใด เหมาะสมที่สุด</div>
+        <div class="qa-answer">✓ คำตอบ: AND</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> เงื่อนไขการรับโบนัสระบุว่าเงื่อนไขทุกข้อต้องเป็นจริงพร้อมกันทั้งหมด จึงต้องใช้ฟังก์ชันทางตรรกศาสตร์ <code>AND</code> ร่วมกับเงื่อนไขต่างๆ</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 13:</span> เราอยากรู้ว่ายอดขายในไตรมาส 1 นี้ มีบิลที่มาจากพนักงาน "ภาคเหนือ" จำนวนกี่ใบ ควรใช้ฟังก์ชันใด เหมาะสมที่สุด</div>
+        <div class="qa-answer">✓ คำตอบ: COUNTIFS</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> การนับจำนวนรายการ (นับใบบิล) ตามเงื่อนไขตั้งแต่ 2 เงื่อนไขขึ้นไป (เงื่อนไขไตรมาส 1 + เงื่อนไขภาคเหนือ) ต้องใช้ฟังก์ชัน <code>COUNTIFS</code></div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 14:</span> ฟังก์ชัน VLOOKUP มีหน้าที่</div>
+        <div class="qa-answer">✓ คำตอบ: ค้นหาข้อมูล</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> <code>VLOOKUP</code> (Vertical Lookup) ทำหน้าที่ค้นหาและดึงข้อมูลจากตารางอ้างอิงตามคีย์ที่กำหนดในแนวตั้ง</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 15:</span> ข้อเสียของ VLOOKUP คือ</div>
+        <div class="qa-answer">✓ คำตอบ: คอลัมน์คำค้นหาต้องอยู่ซ้ายสุดเสมอ</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> ข้อจำกัดหลักของ VLOOKUP คือ คีย์หรือค่าที่ใช้ค้นหาต้องอยู่ในคอลัมน์แรก (ซ้ายสุด) ของช่วงข้อมูลอ้างอิงเสมอ ไม่สามารถค้นหาข้อมูลที่อยู่ทางซ้ายของคีย์ค้นหาได้</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 16:</span> ฟังก์ชัน INDEX และ MATCH มีหน้าที่</div>
+        <div class="qa-answer">✓ คำตอบ: ค้นหาข้อมูล</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> การนำ <code>INDEX</code> (ดึงค่าตามตำแหน่ง) มาร่วมกับ <code>MATCH</code> (หาตำแหน่งของข้อมูล) ใช้สำหรับค้นหาและคืนค่าข้อมูลอย่างมีประสิทธิภาพสูง และแก้ข้อจำกัดของ VLOOKUP ได้ทั้งหมด</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 17:</span> ข้อใดไม่ใช่ประโยชน์ Pivot Table</div>
+        <div class="qa-answer">✓ คำตอบ: การอัปเดตข้อมูลต้นฉบับแบบเรียลไทม์อัตโนมัติ</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Pivot Table ไม่อัปเดตข้อมูลอัตโนมัติทันทีที่มีการเปลี่ยนแปลงข้อมูลในตารางต้นฉบับ ผู้ใช้งานจำเป็นต้องกดปุ่ม Refresh หรือใช้มาโครสั่งงานเพื่อทำการคำนวณใหม่</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 18:</span> ข้อใดไม่ใช่กฎการสร้าง Pivot Table</div>
+        <div class="qa-answer">✓ คำตอบ: ข้อมูลต้องเป็นตัวเลขเท่านั้น</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> ฐานข้อมูลสำหรับสร้าง Pivot Table สามารถประกอบด้วย ข้อความ (Text), วันที่ (Date), หรือค่าตรรกะได้ ไม่จำเป็นต้องเป็นตัวเลขทั้งหมด เนื่องจาก Pivot Table สามารถนำข้อความมาจัดกลุ่มหรือนับจำนวน (Count) ได้เช่นกัน</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 19:</span> Power Pivot คือ</div>
+        <div class="qa-answer">✓ คำตอบ: เครื่องมือจัดการ Data Modeling</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Power Pivot เป็น Add-in ขั้นสูงใน Excel ที่ช่วยจัดการโมเดลข้อมูล (Data Model) รองรับข้อมูลขนาดใหญ่หลายล้านแถว และเชื่อมโยงความสัมพันธ์ระหว่างหลายตารางได้โดยไม่ต้องใช้ VLOOKUP</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 20:</span> Data Analysis Expressions (DAX) คือ</div>
+        <div class="qa-answer">✓ คำตอบ: เป็นชุดภาษาที่ประกอบด้วยฟังก์ชันและตัวดำเนินการ</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> DAX คือชุดภาษาฟังก์ชัน คำสั่ง และตัวดำเนินการ ที่ออกแบบมาเพื่อใช้ในการคำนวณวิเคราะห์ข้อมูล สร้าง Calculated Columns และ Measures ทั้งใน Power Pivot และ Power BI</div>
+    </div>
+
+    <!-- SECTION 2: POWER BI -->
+    <div class="section-header">
+        <span>ส่วนที่ 2: เฉลยแบบทดสอบ Power BI (ข้อ 1 - 20)</span>
+        <span class="tag">Power BI Desktop & Service</span>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 1:</span> นามสกุลไฟล์มาตรฐานของโปรแกรม Power BI Desktop เมื่อทำการบันทึกคือข้อใด?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. .pbix</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> ไฟล์รายงานหลักที่บันทึกจากโปรแกรม Power BI Desktop จะใช้นามสกุล <code>.pbix</code> (Power BI Executive File) ซึ่งบรรจุทั้ง Data Model, Queries และ Visualizations</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 2:</span> หากต้องการทำความสะอาดข้อมูล (Data Cleansing) ตัดคอลัมน์ หรือเปลี่ยนประเภทข้อมูลก่อนนำไปสร้างรายงาน เครื่องมือใดใน Power BI ที่ใช้ทำหน้าที่นี้?</div>
+        <div class="qa-answer">✓ คำตอบ: ค. Power Query</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Power Query เป็นเครื่องมือทำ ETL (Extract, Transform, Load) หลักใน Power BI ที่ใช้สำหรับการเชื่อมต่อข้อมูล ทำความสะอาด แปลงรูปแบบข้อมูล และตัดคอลัมน์ที่ไม่จำเป็น</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 3:</span> หน้าต่าง (View) ใดใน Power BI Desktop ที่ใช้สำหรับสร้างและจัดการความสัมพันธ์ระหว่างตารางต่างๆ?</div>
+        <div class="qa-answer">✓ คำตอบ: ค. Model View</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Model View (มุมมองแบบจำลอง) ใช้สำหรับบริหารจัดการ Data Model สร้าง จัดการ และดูแผนภาพความสัมพันธ์ (Relationships) ระหว่างตารางต่างๆ เช่น 1-to-Many</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 4:</span> องค์ประกอบใดของ Power BI ที่เป็นบริการบนระบบคลาวด์ ใช้สำหรับการแชร์รายงานและสร้าง Dashboard เพื่อให้ผู้อื่นดูผ่านเว็บบราวเซอร์ได้?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. Power BI Service</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Power BI Service (SaaS คลาวด์ของ Microsoft) ทำหน้าที่เป็นแพลตฟอร์มในการเผยแพร่ (Publish) แบ่งปันรายงาน และสร้าง Dashboard เพื่อการทำงานร่วมกันผ่านเว็บบราวเซอร์</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 5:</span> "Data Refresh" ใน Power BI มีจุดประสงค์หลักเพื่ออะไร?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. ดึงข้อมูลล่าสุดจากแหล่งข้อมูลต้นทาง เข้ามาอัปเดตในรายงาน</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Data Refresh คือการดึงข้อมูลใหม่ล่าสุดจากแหล่งข้อมูลต้นทาง (Data Source) เข้ามาประมวลผลและอัปเดตในรายงาน เพื่อให้รายงานแสดงข้อมูลที่เป็นปัจจุบันเสมอ</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 6:</span> หากคุณต้องการดู "แนวโน้ม" ของยอดขายที่เกิดขึ้นในแต่ละเดือนตลอดทั้งปี กราฟชนิดใดเหมาะสมที่สุด?</div>
+        <div class="qa-answer">✓ คำตอบ: ค. Line Chart (กราฟเส้น)</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Line Chart เหมาะที่สุดสำหรับการนำเสนอข้อมูลอนุกรมเวลา (Time-series data) เพื่อวิเคราะห์แนวโน้ม (Trends) การเติบโต หรือความผันผวนตามลำดับเวลา</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 7:</span> กราฟชนิดใดเหมาะสมที่สุดสำหรับการแสดง "สัดส่วน" ของยอดขายแบ่งตามภูมิภาคเปรียบเทียบกับยอดขายทั้งหมด (100%)?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. Donut Chart (กราฟโดนัท)</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Donut Chart หรือ Pie Chart เหมาะสำหรับการแสดงสัดส่วนเชิงเปอร์เซ็นต์ (Parts-to-whole relationship) ของหมวดหมู่ย่อยเทียบกับภาพรวม 100%</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 8:</span> หากคุณมีข้อมูลละติจูด (Latitude) และลองจิจูด (Longitude) หรือชื่อจังหวัด และต้องการแสดงยอดขายตามพื้นที่ Visual ใดเหมาะสมที่สุด?</div>
+        <div class="qa-answer">✓ คำตอบ: ค. Map</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Map Visual ถูกออกแบบมาเพื่อประมวลผลข้อมูลทางภูมิศาสตร์ (Geographic Data) เช่น ชื่อประเทศ จังหวัด เมือง หรือพิกัด Lat/Long เพื่อนำเสนอในรูปแบบแผนที่</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 9:</span> หากต้องการเปรียบเทียบยอดขายของพนักงานขายแต่ละคน โดยเรียงลำดับจากคนที่ทำยอดได้มากที่สุดไปหาน้อยที่สุด ควรใช้กราฟใดจึงจะดูง่ายที่สุด?</div>
+        <div class="qa-answer">✓ คำตอบ: ก. Bar Chart (กราฟแท่ง)</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Bar Chart (กราฟแท่งแนวนอน) ช่วยให้การเปรียบเทียบความแตกต่างระหว่างหมวดหมู่ที่มีชื่อยาว เช่น ชื่อพนักงาน และการเปรียบเทียบเรียงลำดับมากไปน้อยทำได้ชัดเจนและอ่านง่ายที่สุด</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 10:</span> Visual ใดใน Power BI ที่ทำหน้าที่เป็น "ตัวกรองข้อมูล" บนหน้าจอรายงาน เพื่อให้ผู้ใช้สามารถคลิกเลือกดูข้อมูลเฉพาะปี หรือเฉพาะแผนกที่สนใจได้?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. Slicer</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Slicer คือ Visual ที่ทำหน้าที่เป็นตัวกรองข้อมูลแบบโต้ตอบ (Interactive Filter) บนหน้ารายงาน เพื่อให้ผู้ใช้งานสามารถคลิกเลือกกรองมิติข้อมูลตามต้องการ</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 11:</span> กราฟใดเหมาะสมที่สุดในการวิเคราะห์ความสัมพันธ์ ระหว่างข้อมูลตัวเลข 2 ตัวแปร เช่น งบโฆษณากับยอดขาย?</div>
+        <div class="qa-answer">✓ คำตอบ: ค. Scatter Chart</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Scatter Chart (กราฟกระจาย) ออกแบบมาเพื่อใช้วิเคราะห์ความสัมพันธ์ (Correlation) และการกระจายตัวระหว่างตัวแปรเชิงปริมาณ (Numerical variables) 2 ตัวแปร</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 12:</span> หากต้องการแสดงตัวเลขสรุปค่าเดียวที่สำคัญมากๆ บนหน้ารายงาน (เช่น ยอดขายรวมทั้งบริษัท) ควรเลือกใช้ Visual ใด?</div>
+        <div class="qa-answer">✓ คำตอบ: ก. Card</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Card Visual เหมาะสำหรับการแสดงผลค่าสถิติเดี่ยว (Single metric / KPI) ตัวเลขขนาดใหญ่เพื่อเน้นย้ำความสำคัญ เช่น ยอดขายรวม หรือจำนวนลูกค้ารวม</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 13:</span> DAX ย่อมาจากอะไร?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. Data Analysis Expressions</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> DAX ย่อมาจาก Data Analysis Expressions เป็นภาษาที่ใช้สำหรับการสร้างการคำนวณขั้นสูงใน Power BI, Power Pivot และ SSAS Tabular</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 14:</span> ความแตกต่างที่สำคัญที่สุดระหว่าง Calculated Column และ Measure คืออะไร?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. Column จะคำนวณทีละแถว Measure คำนวณตามบริบทการกรองบนหน้าจอรายงาน</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Calculated Column ประมวลผลแบบ Row Context และจัดเก็บค่าลง RAM ทุกแถวในตาราง ขณะที่ Measure จะประมวลผลแบบ Filter Context คำนวณแบบ Dynamic ตามตัวกรองบนหน้าจอรายงานโดยไม่ใช้พื้นที่จัดเก็บเพิ่ม</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 15:</span> ฟังก์ชัน DAX ใดที่ใช้สำหรับหาผลรวมของค่าตัวเลขในคอลัมน์ที่กำหนด?</div>
+        <div class="qa-answer">✓ คำตอบ: ค. SUM</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> ฟังก์ชัน <code>SUM</code> ในภาษา DAX ใช้สำหรับคำนวณหาผลรวมของตัวเลขทั้งหมดที่มีอยู่ในคอลัมน์ที่ระบุ</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 16:</span> ต้องการนับจำนวนแถวทั้งหมดที่อยู่ในตาราง "Sales" ควรใช้ฟังก์ชัน DAX ใด?</div>
+        <div class="qa-answer">✓ คำตอบ: ค. COUNTROWS('Sales')</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> <code>COUNTROWS</code> ใช้สำหรับนับจำนวนบรรทัดหรือแถวทั้งหมดที่อยู่ในตารางที่กำหนด (Table Argument) โดยตรง</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 17:</span> ฟังก์ชันใดใน DAX ที่ใช้สำหรับ "นับจำนวนข้อมูลที่ไม่ซ้ำกัน" (เช่น นับจำนวนรหัสลูกค้าที่ไม่ซ้ำกันว่ามีกี่คน)?</div>
+        <div class="qa-answer">✓ คำตอบ: ง. DISTINCTCOUNT</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> <code>DISTINCTCOUNT</code> ทำหน้านี้นับจำนวนรายการที่ไม่ซ้ำกัน (Unique Value Count) ในคอลัมน์ เหมาะสำหรับนับจำนวนลูกค้า หรือจำนวนบิลที่เป็นเอกเทศ</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 18:</span> ความแตกต่างที่สำคัญระหว่าง "Canvas background" และ "Wallpaper" คือข้อใด?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. Canvas background เปลี่ยนสีเฉพาะพื้นที่ขอบเขตที่ใช้จัดวางกราฟ ส่วน Wallpaper เปลี่ยนสีพื้นที่ว่างทั้งหมดที่อยู่รอบนอกพื้นที่ทำงาน</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> Canvas background คือพื้นหลังเฉพาะบริเวณพื้นที่ตรงกลางสำหรับวาง Visuals ส่วน Wallpaper คือฉากหลังภายนอกทั้งหมดที่อยู่รอบนอกผืน Canvas</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 19:</span> เมื่อแทรกรูปภาพลงใน Canvas background แล้วพบว่ารูปภาพมีสีเข้มเกินไปจนทำให้มองเห็นกราฟหรือข้อมูลได้ไม่ชัดเจน คุณควรปรับแก้ที่การตั้งค่าใด?</div>
+        <div class="qa-answer">✓ คำตอบ: ค. Transparency</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> การปรับค่า <code>Transparency</code> (ความโปร่งแสง) ช่วยลดความเข้มของภาพพื้นหลัง ทำให้ภาพจางลงและไม่แย่งความโดดเด่นของกราฟข้อมูลบนรายงาน</div>
+    </div>
+
+    <div class="qa-card">
+        <div class="qa-question"><span class="qa-num">ข้อ 20:</span> ต้องการสร้างหน้าเพจพิเศษเพื่อให้แสดงผลเป็น "หน้าต่างป๊อปอัป" ขนาดเล็ก เมื่อผู้ใช้นำเมาส์ไปชี้ที่กราฟในหน้ารายงานหลัก คุณต้องเปิดใช้งาน (On) คำสั่งใดในหัวข้อ Page information?</div>
+        <div class="qa-answer">✓ คำตอบ: ข. Allow use as tooltip</div>
+        <div class="qa-explain"><strong>คำอธิบาย:</strong> การกำหนดให้หน้าเพจทำงานเป็น Report Page Tooltip (หน้าป๊อปอัปรายละเอียด) จะต้องเปิดตัวเลือก <code>Allow use as tooltip</code> ในหมวด Page Information ของหน้านั้นๆ</div>
+    </div>
+
+</div>
+
+</body>
+</html>
